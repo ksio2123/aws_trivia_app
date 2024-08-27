@@ -1,0 +1,197 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "aws-sam-cli@1.117.0": {
+      "last_modified": "2024-06-08T17:34:36Z",
+      "resolved": "github:NixOS/nixpkgs/cd18e2ae9ab8e2a0a8d715b60c91b54c0ac35ff9#aws-sam-cli",
+      "source": "devbox-search",
+      "version": "1.117.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/w4a9zccpvzbjma0aw7jdbcpsxhfisk6b-aws-sam-cli-1.117.0",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/6zazh1wjarv6g8kr02vph0fnhz68a6l1-aws-sam-cli-1.117.0-dist"
+            }
+          ],
+          "store_path": "/nix/store/w4a9zccpvzbjma0aw7jdbcpsxhfisk6b-aws-sam-cli-1.117.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/4skz5zd9wj5yrc3jv6yb35x8nszdnk23-aws-sam-cli-1.117.0",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/1140jvj5qxi9r9zmjhipn39z7lyca6mf-aws-sam-cli-1.117.0-dist"
+            }
+          ],
+          "store_path": "/nix/store/4skz5zd9wj5yrc3jv6yb35x8nszdnk23-aws-sam-cli-1.117.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/rbx503gwjgp88164g943hk26k53k3qxf-aws-sam-cli-1.117.0",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/63lwx8xfrx4z5z1slj1lgsi9mj7gnicr-aws-sam-cli-1.117.0-dist"
+            }
+          ],
+          "store_path": "/nix/store/rbx503gwjgp88164g943hk26k53k3qxf-aws-sam-cli-1.117.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/s924ng4sf32dvhd02d993rykq5d40mdq-aws-sam-cli-1.117.0",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/s1ldvly653xfj12z90zfy16dlcnisbj7-aws-sam-cli-1.117.0-dist"
+            }
+          ],
+          "store_path": "/nix/store/s924ng4sf32dvhd02d993rykq5d40mdq-aws-sam-cli-1.117.0"
+        }
+      }
+    },
+    "awscli2@latest": {
+      "last_modified": "2024-08-16T08:27:12Z",
+      "resolved": "github:NixOS/nixpkgs/733f5a9806175f86380b14529cb29e953690c148#awscli2",
+      "source": "devbox-search",
+      "version": "2.17.18",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/vblq855q85l647f1i1hr2lnw5yc2h9ik-awscli2-2.17.18",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/60jvn84viz2k31x5s5qllh7mn7znk88w-awscli2-2.17.18-dist"
+            }
+          ],
+          "store_path": "/nix/store/vblq855q85l647f1i1hr2lnw5yc2h9ik-awscli2-2.17.18"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/5aaqkbpizj1bz44azwz17gs81i21m03w-awscli2-2.17.18",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/nsky9zmz7agvkscmlsn9mfd7lwklkqrp-awscli2-2.17.18-dist"
+            }
+          ],
+          "store_path": "/nix/store/5aaqkbpizj1bz44azwz17gs81i21m03w-awscli2-2.17.18"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/mhkdrmh6hiyq9gpmpkh5nyh025mhzqxw-awscli2-2.17.18",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/qm49210lb2fin0v7n762dripsqgh6zd1-awscli2-2.17.18-dist"
+            }
+          ],
+          "store_path": "/nix/store/mhkdrmh6hiyq9gpmpkh5nyh025mhzqxw-awscli2-2.17.18"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/m71lv1hw85szzzwagg9ikmyzxzvq2izq-awscli2-2.17.18",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/j2fvv0isg21jjg6019n8f8sn6jjg534j-awscli2-2.17.18-dist"
+            }
+          ],
+          "store_path": "/nix/store/m71lv1hw85szzzwagg9ikmyzxzvq2izq-awscli2-2.17.18"
+        }
+      }
+    },
+    "nodejs@16.0.0": {
+      "last_modified": "2021-05-03T18:16:27Z",
+      "plugin_version": "0.0.2",
+      "resolved": "github:NixOS/nixpkgs/0111666954f772565cd83c3b7bea179e7808515c#nodejs-16_x",
+      "source": "devbox-search",
+      "version": "16.0.0"
+    },
+    "python@3.9": {
+      "last_modified": "2024-08-14T11:41:26Z",
+      "plugin_version": "0.0.3",
+      "resolved": "github:NixOS/nixpkgs/0cb2fd7c59fed0cd82ef858cbcbdb552b9a33465#python39",
+      "source": "devbox-search",
+      "version": "3.9.19",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/wwyxf1bzcpygpd1sldmwzycl4a97z3c6-python3-3.9.19",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/wwyxf1bzcpygpd1sldmwzycl4a97z3c6-python3-3.9.19"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/94knk3ylqg0vj8dq5nqpghbps7kzvj36-python3-3.9.19",
+              "default": true
+            },
+            {
+              "name": "debug",
+              "path": "/nix/store/x1cqlyham4yddgi04aj1nci8i0071mqk-python3-3.9.19-debug"
+            }
+          ],
+          "store_path": "/nix/store/94knk3ylqg0vj8dq5nqpghbps7kzvj36-python3-3.9.19"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/nmhkk29q5z717rrpx20ygqvib62y23w6-python3-3.9.19",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/nmhkk29q5z717rrpx20ygqvib62y23w6-python3-3.9.19"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/izghbhc5zyr2rr9mf2xsq3x758cw47aa-python3-3.9.19",
+              "default": true
+            },
+            {
+              "name": "debug",
+              "path": "/nix/store/jbkp4r8bdsnj84ni251725jiysnpv84z-python3-3.9.19-debug"
+            }
+          ],
+          "store_path": "/nix/store/izghbhc5zyr2rr9mf2xsq3x758cw47aa-python3-3.9.19"
+        }
+      }
+    }
+  }
+}
