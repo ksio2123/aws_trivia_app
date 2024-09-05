@@ -10,33 +10,36 @@ from botocore.exceptions import ClientError
 
 DYNAMODB = boto3.resource('dynamodb')
 TABLE = DYNAMODB.Table(os.getenv('TABLE_NAME'))
-MANAGEMENT = boto3.client('apigatewaymanagementapi', endpoint_url=os.getenv('APIGW_ENDPOINT'))
+MANAGEMENT = boto3.client('apigatewaymanagementapi',
+                          endpoint_url=os.getenv('APIGW_ENDPOINT'))
 STEPFUNCTIONS = boto3.client('stepfunctions')
 COLORS = ("AliceBlue,AntiqueWhite,Aqua,Aquamarine,Azure,Beige,Bisque,Black,BlanchedAlmond,Blue,"
-"BlueViolet,Brown,BurlyWood,CadetBlue,Chartreuse,Chocolate,Coral,CornflowerBlue,Cornsilk,Crimson,"
-"Cyan,DarkBlue,DarkCyan,DarkGoldenrod,DarkGray,DarkGreen,DarkKhaki,DarkMagenta,DarkOliveGreen,"
-"DarkOrange,DarkOrchid,DarkRed,DarkSalmon,DarkSeaGreen,DarkSlateBlue,DarkSlateGray,DarkTurquoise,"
-"DarkViolet,DeepPink,DeepSkyBlue,DimGray,DodgerBlue,FireBrick,FloralWhite,ForestGreen,Fuchsia,"
-"Gainsboro,GhostWhite,Gold,Goldenrod,Gray,Green,GreenYellow,Honeydew,HotPink,IndianRed,Indigo,"
-"Ivory,Khaki,Lavender,LavenderBlush,LawnGreen,LemonChiffon,LightBlue,LightCora,LightCyan,"
-"LightGoldenrodYellow,LightGreen,LightGrey,LightPink,LightSalmon,LightSeaGreen,LightSkyBlue,"
-"LightSlateGray,LightSteelBlu,LightYellow,Lime,LimeGreen,Linen,Magenta,Maroon,MediumAquamarine,"
-"MediumBlue,MediumOrchid,MediumPurple,MediumSeaGreen,MediumSlateBlue,MediumSpringGreen,"
-"MediumTurquoise,MediumVioletRed,MidnightBlue,MintCream,MistyRose,Moccasin,NavajoWhite,Navy,"
-"OldLace,Olive,OliveDrab,Orange,OrangeRed,Orchid,PaleGoldenrod,PaleGreen,PaleTurquoise,"
-"PaleVioletRed,PapayaWhip,PeachPuff,Peru,Pink,Plum,PowderBlue,Purple,Red,RosyBrown,RoyalBlue,"
-"SaddleBrown,Salmon,SandyBrown,SeaGreen,Seashell,Sienna,Silver,SkyBlue,SlateBlue,SlateGray,Snow,"
-"SpringGreen,SteelBlue,Tan,Teal,Thistle,Tomato,Turquoise,Violet,Wheat,White,WhiteSmoke,Yellow,"
-"YellowGreen").split(",")
+          "BlueViolet,Brown,BurlyWood,CadetBlue,Chartreuse,Chocolate,Coral,CornflowerBlue,Cornsilk,Crimson,"
+          "Cyan,DarkBlue,DarkCyan,DarkGoldenrod,DarkGray,DarkGreen,DarkKhaki,DarkMagenta,DarkOliveGreen,"
+          "DarkOrange,DarkOrchid,DarkRed,DarkSalmon,DarkSeaGreen,DarkSlateBlue,DarkSlateGray,DarkTurquoise,"
+          "DarkViolet,DeepPink,DeepSkyBlue,DimGray,DodgerBlue,FireBrick,FloralWhite,ForestGreen,Fuchsia,"
+          "Gainsboro,GhostWhite,Gold,Goldenrod,Gray,Green,GreenYellow,Honeydew,HotPink,IndianRed,Indigo,"
+          "Ivory,Khaki,Lavender,LavenderBlush,LawnGreen,LemonChiffon,LightBlue,LightCora,LightCyan,"
+          "LightGoldenrodYellow,LightGreen,LightGrey,LightPink,LightSalmon,LightSeaGreen,LightSkyBlue,"
+          "LightSlateGray,LightSteelBlu,LightYellow,Lime,LimeGreen,Linen,Magenta,Maroon,MediumAquamarine,"
+          "MediumBlue,MediumOrchid,MediumPurple,MediumSeaGreen,MediumSlateBlue,MediumSpringGreen,"
+          "MediumTurquoise,MediumVioletRed,MidnightBlue,MintCream,MistyRose,Moccasin,NavajoWhite,Navy,"
+          "OldLace,Olive,OliveDrab,Orange,OrangeRed,Orchid,PaleGoldenrod,PaleGreen,PaleTurquoise,"
+          "PaleVioletRed,PapayaWhip,PeachPuff,Peru,Pink,Plum,PowderBlue,Purple,Red,RosyBrown,RoyalBlue,"
+          "SaddleBrown,Salmon,SandyBrown,SeaGreen,Seashell,Sienna,Silver,SkyBlue,SlateBlue,SlateGray,Snow,"
+          "SpringGreen,SteelBlue,Tan,Teal,Thistle,Tomato,Turquoise,Violet,Wheat,White,WhiteSmoke,Yellow,"
+          "YellowGreen").split(",")
 WAIT_SECONDS = 5
 
 SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(SCRIPT_PATH, "all-questions.yaml"), 'r', encoding="utf-8") as stream:
     QUESTIONS = yaml.safe_load(stream)
 
+
 def get_random_player_name():
     "Generate a random player name"
     return random.choice(COLORS)
+
 
 def get_body_param(event, param):
     "Load JSON body content and get the value of a property"
@@ -44,16 +47,19 @@ def get_body_param(event, param):
     value = body[param]
     return value
 
+
 def get_players(game_id):
     "Query dynamo for a list of game players"
     connections = TABLE.query(
-        KeyConditionExpression=boto3.dynamodb.conditions.Key("gameId").eq(game_id)
+        KeyConditionExpression=boto3.dynamodb.conditions.Key(
+            "gameId").eq(game_id)
     )
     return [{
-        "connectionId" : p["connectionId"],
+        "connectionId": p["connectionId"],
         "playerName": p["playerName"],
         "score": int(p["score"])
-        } for p in connections["Items"]]
+    } for p in connections["Items"]]
+
 
 def send_broadcast(connections, data):
     "Post out websocket messages to a list of connection ids"
@@ -62,7 +68,8 @@ def send_broadcast(connections, data):
             if "action" in data and data["action"] == "playerlist":
                 # we need to insert "currentPlayer" into player list broadcasts
                 for player in data["players"]:
-                    player["currentPlayer"] = (connection==player["connectionId"])
+                    player["currentPlayer"] = (
+                        connection == player["connectionId"])
 
             MANAGEMENT.post_to_connection(
                 Data=json.dumps(data),
@@ -71,6 +78,7 @@ def send_broadcast(connections, data):
         except ClientError as error:
             if error.response['Error']['Code'] == 'GoneException':
                 print("Missing connection ", connection)
+
 
 def trivia_newgame(event, _):
     "Lambda function to intitate a new game"
@@ -97,8 +105,8 @@ def trivia_newgame(event, _):
     MANAGEMENT.post_to_connection(
         Data=json.dumps({"action": "playerlist", "players": [
             {
-                "connectionId" : connection_id,
-                "currentPlayer" : True,
+                "connectionId": connection_id,
+                "currentPlayer": True,
                 "playerName": player_name,
                 "score": 0
             }
@@ -110,6 +118,7 @@ def trivia_newgame(event, _):
         "statusCode": 200,
         "body": 'Game created.'
     }
+
 
 def trivia_joingame(event, _):
     "Lambda function to join a game"
@@ -163,7 +172,8 @@ def trivia_startgame(event, _):
     )
 
     players = get_players(game_id)
-    send_broadcast([p["connectionId"] for p in players], {"action": "gamestarted"})
+    send_broadcast([p["connectionId"]
+                   for p in players], {"action": "gamestarted"})
 
     return {
         "statusCode": 200,
@@ -191,6 +201,7 @@ def trivia_answer(event, _):
         "body": 'Recieved answer.'
     }
 
+
 def trivia_question(event, _):
     "Send a question - called from statemachine"
     game_id = event["gameid"]
@@ -208,6 +219,7 @@ def trivia_question(event, _):
 
     return True
 
+
 def trivia_calculate_scores(event, _):
     "Calc scores for a game - called from statemachine"
     game_id = event["gameid"]
@@ -216,7 +228,8 @@ def trivia_calculate_scores(event, _):
     question = event["questions"][question_pos]
 
     connections = TABLE.query(
-        KeyConditionExpression=boto3.dynamodb.conditions.Key("gameId").eq(game_id)
+        KeyConditionExpression=boto3.dynamodb.conditions.Key(
+            "gameId").eq(game_id)
     )
 
     # spin thru the connections and check their answers
@@ -236,8 +249,8 @@ def trivia_calculate_scores(event, _):
             )
 
         players.append({
-            "connectionId" : connection_id,
-            "playerName" : player_name,
+            "connectionId": connection_id,
+            "playerName": player_name,
             "score": score
         })
 
@@ -251,11 +264,11 @@ def trivia_calculate_scores(event, _):
     game_over = question_pos >= len(questions)
     if game_over:
         send_broadcast(
-             [c["connectionId"] for c in connections["Items"]],
-             {"action": "gameover"}
+            [c["connectionId"] for c in connections["Items"]],
+            {"action": "gameover"}
         )
 
     return {
-                "questionpos": question_pos,
-                "IsGameOver": game_over
-            }
+        "questionpos": question_pos,
+        "IsGameOver": game_over
+    }
