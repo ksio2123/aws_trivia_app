@@ -20,12 +20,3 @@ phases:
       - aws s3 sync --acl public-read build $S3_BUCKET
       # - pylint --fail-under=8 trivia-app/back-end-python/gameactions/app.py
       # - pytest trivia-app/back-end-python/tests/unit --junit-xml=unittests.xml --cov-report=xml --cov=gameactions --cov-branch
-
-reports:
-  UnitTests:
-    files:
-      - 'unittests.xml'
-  NewCoverage: #
-    files:
-      - 'coverage.xml'
-    file-format: COBERTURAXML
