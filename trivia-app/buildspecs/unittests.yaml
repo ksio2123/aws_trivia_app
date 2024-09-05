@@ -4,8 +4,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - pip3 install -U -r back-end-python/gameactions/requirements.txt
-      - pip3 install -U -r back-end-python/tests/requirements.txt
+      - pip3 install -U -r trivia-app/back-end-python/gameactions/requirements.txt
+      - pip3 install -U -r trivia-app/back-end-python/tests/requirements.txt
 
   build:
     commands:
