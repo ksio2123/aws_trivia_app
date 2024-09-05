@@ -4,7 +4,7 @@
     "awscli2@latest",
     "aws-sam-cli@1.117.0",
     "nodejs@16.0.0",
-    "python@latest"
+    "python@3.9"
   ],
   "env": {
     "DEVBOX_COREPACK_ENABLED": "true"
