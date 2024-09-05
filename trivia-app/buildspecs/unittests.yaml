@@ -9,8 +9,8 @@ phases:
 
   build:
     commands:
-      - pylint --fail-under=8 back-end-python/gameactions/app.py
-      - pytest back-end-python/tests/unit --junit-xml=unittests.xml --cov-report=xml --cov=gameactions --cov-branch
+      - pylint --fail-under=8 trivia-app/back-end-python/gameactions/app.py
+      - pytest trivia-app/back-end-python/tests/unit --junit-xml=unittests.xml --cov-report=xml --cov=gameactions --cov-branch
 
 reports:
   UnitTests:
