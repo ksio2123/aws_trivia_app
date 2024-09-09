@@ -1,4 +1,4 @@
-trivia app built using:
+Multiplayer Trivia App built using:
 
 Frontend:
 - Next.js (React CSR)

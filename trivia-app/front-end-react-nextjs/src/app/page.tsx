@@ -43,7 +43,7 @@ function JoinGame({onJoinGame}: {onJoinGame: () => void}) {
       <Card.Body>
         <Card.Title>Join Game</Card.Title>
         <Card.Text>
-          You've been invited to join a game!
+          You&apos;ve been invited to join a game!
         </Card.Text>
         <Button variant="primary" onClick={onJoinGame}>Join</Button>
       </Card.Body>
@@ -109,7 +109,7 @@ function Questions({onAnswer, question} : QuestionsProps) {
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Let's Play!</Card.Title>
+        <Card.Title>Let&apos;s Play!</Card.Title>
           {questionBody}
       </Card.Body>
     </Card>
@@ -140,7 +140,7 @@ function Players({playerList}: {playerList: Player[]}) {
         <Card.Title>Players</Card.Title>
 
         <ListGroup>
-        {playerList && playerList.filter((player)=>player.currentPlayer).map((player, i) => {
+        {playerList && playerList.filter((player)=>player.currentPlayer).map((player) => {
             return (<ListGroup.Item key={player.connectionId} variant="primary" className="d-flex justify-content-between align-items-center">
               <span style={{color:player.playerName}}>&#11044; <span className="small" style={{color:"Black"}}>{player.playerName}</span></span>
               <Badge pill>{player.score}</Badge>
@@ -149,7 +149,7 @@ function Players({playerList}: {playerList: Player[]}) {
          </ListGroup>
          <p></p>
          <ListGroup>
-        {playerList ? playerList.filter((player)=>!player.currentPlayer).map((player, i) => {
+        {playerList ? playerList.filter((player)=>!player.currentPlayer).map((player) => {
             return (<ListGroup.Item key={player.connectionId} className="d-flex justify-content-between align-items-center">
               <span style={{color:player.playerName}}>&#11044; <span className="small" style={{color:"Black"}}>{player.playerName}</span></span>
               <Badge pill >{player.score}</Badge>
@@ -178,7 +178,7 @@ export default function Home() {
   }, [])
   useEffect(() => {
     const ws = new WebSocket(process.env.WEBSOCKET_ENDPOINT ?? '');
-    ws.onopen = (evt) => {
+    ws.onopen = () => {
       setConnected(true);
     }
     ws.onmessage = (evt) => {
