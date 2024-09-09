@@ -25,3 +25,8 @@ DevOps:
 Protocols:
 - Web Socket
 - JSON
+
+- [ ] Create Pipeline using AWS CDK
+- [ ] Add S3 and Route53 to AWS CDK
+- [ ] Create Dev branch and CNAME bucket
+- [ ] Codebuild using Lambda 
