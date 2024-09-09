@@ -14,6 +14,8 @@ Database:
 Infrastructure
 - AWS API Gateway
 - AWS Lambda (Serverless) Python
+- AWS S3 Bucket (Static Site Hosting)
+- Cloudflare Subdomain reroute
 
 DevOps:
 - AWS Code Pipeline (CI/CD Continuous Deployment)
