@@ -26,6 +26,7 @@ Protocols:
 - Web Socket
 - JSON
 
+- [ ] Separate out Page.tsxe to Components and Types
 - [ ] Create Pipeline using AWS CDK
 - [ ] Add S3 and Route53 to AWS CDK
 - [ ] Create Dev branch and CNAME bucket
