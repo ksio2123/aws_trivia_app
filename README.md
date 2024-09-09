@@ -3,11 +3,4 @@
 This projects dependencies are managed by Devbox:
 https://www.jetify.com/devbox
 
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-pnpm dev
-```
+please use the link below to get the dev environment started: https://www.jetify.com/devbox/docs/quickstart/ 
