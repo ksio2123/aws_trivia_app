@@ -4,6 +4,8 @@ Frontend:
 - Next.js (React CSR)
 - Bootstrap 5 (component library)
 - Typescript
+- pnpm package manager
+- Single Page App
 
 Backend:
 - Python
