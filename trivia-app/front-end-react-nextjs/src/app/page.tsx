@@ -12,6 +12,8 @@ import { GameOver } from './_components/GameOver';
 import { Players } from './_components/Players';
 import { Questions } from './_components/Questions';
 
+const {STEP_GETSTARTED, STEP_JOINGAME, STEP_WAITING, STEP_GAMEOVER, STEP_QUESTIONS} =  TriviaStep;
+
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(TriviaStep.STEP_GETSTARTED);
   const [connected, setConnected] = useState(false);
@@ -19,9 +21,10 @@ export default function Home() {
   const [playerList, setPlayerList] = useState<Player[]>(null!);
   const [question, setQuestion] = useState<Question>(null!);
   const connection = useRef<WebSocket>(null!);
+  // might need to change the routes for joining game
   useLayoutEffect(() => {
     if (document.location.hash.startsWith('#newgame') ) {
-      setCurrentStep(TriviaStep.STEP_JOINGAME);
+      setCurrentStep(STEP_JOINGAME);
       setGameId(document.location.hash.replace('#newgame/', ''));
     }
   }, [])
@@ -43,7 +46,7 @@ export default function Home() {
           setQuestion(message.question);
           break;
         case "gameover":
-          setCurrentStep(TriviaStep.STEP_GAMEOVER);
+          setCurrentStep(STEP_GAMEOVER);
           break;
         default:
           break;
@@ -55,17 +58,17 @@ export default function Home() {
   const newGame = () => {
     const message = JSON.stringify({ "action": "newgame" });
     connection.current.send(message);
-    setCurrentStep(TriviaStep.STEP_WAITING);
+    setCurrentStep(STEP_WAITING);
   }
   const joinGame = () => {
     const message = JSON.stringify({ "action": "joingame", "gameid": gameId });
     connection.current.send(message);
-    setCurrentStep(TriviaStep.STEP_QUESTIONS);
+    setCurrentStep(STEP_QUESTIONS);
   }
   const startGame = () => {
     const message = JSON.stringify({ "action": "startgame", "gameid": gameId });
     connection.current.send(message);
-    setCurrentStep(TriviaStep.STEP_QUESTIONS);
+    setCurrentStep(STEP_QUESTIONS);
   }
   const answer = (questionId: string, answer: string) => {
     const message = JSON.stringify({
@@ -80,11 +83,11 @@ export default function Home() {
     <Container className="p-3">
       <Row>
         <Col>
-          {currentStep === TriviaStep.STEP_GETSTARTED && <GetStarted onNewGame={newGame} />}
-          {currentStep === TriviaStep.STEP_JOINGAME && <JoinGame onJoinGame={joinGame} />}
-          {currentStep === TriviaStep.STEP_WAITING && <Waiting onStartGame={startGame} gameId={gameId}/>}
-          {currentStep === TriviaStep.STEP_QUESTIONS && <Questions onAnswer={answer}  question={question}/>}
-          {currentStep === TriviaStep.STEP_GAMEOVER && <GameOver />}
+          {currentStep === STEP_GETSTARTED && <GetStarted onNewGame={newGame} />}
+          {currentStep === STEP_JOINGAME && <JoinGame onJoinGame={joinGame} />}
+          {currentStep === STEP_WAITING && <Waiting onStartGame={startGame} gameId={gameId}/>}
+          {currentStep === STEP_QUESTIONS && <Questions onAnswer={answer}  question={question}/>}
+          {currentStep === STEP_GAMEOVER && <GameOver />}
           {connected ? <small>&#129001; connected</small> :  <small>&#128997; disconnected</small>}
         </Col>
         <Col xs={3}>
