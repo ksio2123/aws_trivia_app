@@ -5,12 +5,12 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import { Question } from './_lib/Question';
 import { Player } from './_lib/Player';
 import { TriviaStep } from './_lib/TriviaStep';
-import { GetStarted } from './_component/GetStarted';
-import { JoinGame } from './_component/JoinGame';
-import { Waiting } from './_component/Waiting';
-import { GameOver } from './_component/GameOver';
-import { Players } from './_component/Players';
-import { Questions } from './_component/Questions';
+import { GetStarted } from './_components/GetStarted';
+import { JoinGame } from './_components/JoinGame';
+import { Waiting } from './_components/Waiting';
+import { GameOver } from './_components/GameOver';
+import { Players } from './_components/Players';
+import { Questions } from './_components/Questions';
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(TriviaStep.STEP_GETSTARTED);
