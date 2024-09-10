@@ -15,7 +15,7 @@ import { Questions } from './_components/Questions';
 const {STEP_GETSTARTED, STEP_JOINGAME, STEP_WAITING, STEP_GAMEOVER, STEP_QUESTIONS} =  TriviaStep;
 
 export default function Home() {
-  const [currentStep, setCurrentStep] = useState(TriviaStep.STEP_GETSTARTED);
+  const [currentStep, setCurrentStep] = useState(STEP_GETSTARTED);
   const [connected, setConnected] = useState(false);
   const [gameId, setGameId] = useState<string>(null!);
   const [playerList, setPlayerList] = useState<Player[]>(null!);
