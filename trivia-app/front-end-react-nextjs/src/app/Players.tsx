@@ -1,5 +1,5 @@
 import { Card, ListGroup, Badge } from 'react-bootstrap';
-import { Player } from '../_lib/Player';
+import { Player } from './_lib/Player';
 
 export function Players({playerList}: {playerList: Player[]}) {
   return (

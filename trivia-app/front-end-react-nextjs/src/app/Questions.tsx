@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Spinner, Col, Button, Card } from 'react-bootstrap';
-import { Question } from '../_lib/Question';
+import { Question } from './_lib/Question';
 
 type QuestionsProps = {
   onAnswer: (questionId: string, answer: string) => void,
