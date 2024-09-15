@@ -11,7 +11,8 @@ import { Waiting } from './Waiting';
 import { GameOver } from './GameOver';
 import { Players } from './Players';
 import { Questions } from './Questions';
-import { MessageType } from './_lib/MessageType' 
+import { MessageType } from './_lib/MessageType';
+import { useWebSocket } from './_lib/useWebSocket';
 
 const {STEP_GETSTARTED, STEP_JOINGAME, STEP_WAITING, STEP_GAMEOVER, STEP_QUESTIONS} =  TriviaStep;
 const {GAME_CREATED, PLAYER_LIST, QUESTION, GAMEOVER} = MessageType;
@@ -30,6 +31,9 @@ export default function Home() {
       setGameId(document.location.hash.replace('#newgame/', ''));
     }
   }, [])
+
+  // const ws = useWebSocket(process.env.WEBSOCKET_ENDPOINT ?? '');
+  // setConnected(ws.connected);
   useEffect(() => {
     const ws = new WebSocket(process.env.WEBSOCKET_ENDPOINT ?? '');
     ws.onopen = () => {
