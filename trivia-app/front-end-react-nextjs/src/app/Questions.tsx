@@ -35,7 +35,6 @@ export function Questions({ onAnswer, question }: QuestionsProps) {
       </div>
     </Col>
   );
-  // this is a comment
   return (
     <Card>
       <Card.Body>

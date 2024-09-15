@@ -8,8 +8,6 @@ export function GameOver() {
     <div className='jumbotron'>
       <h1>Game Completed!</h1>
       <p>
-      </p>
-      <p>
         <Button variant="primary" onClick={()=>restart()}>Restart</Button>
       </p>
   </div>

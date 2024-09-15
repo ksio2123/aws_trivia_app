@@ -11,14 +11,16 @@ import { Waiting } from './Waiting';
 import { GameOver } from './GameOver';
 import { Players } from './Players';
 import { Questions } from './Questions';
+import { MessageType } from './_lib/MessageType' 
 
 const {STEP_GETSTARTED, STEP_JOINGAME, STEP_WAITING, STEP_GAMEOVER, STEP_QUESTIONS} =  TriviaStep;
+const {GAME_CREATED, PLAYER_LIST, QUESTION, GAMEOVER} = MessageType;
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(STEP_GETSTARTED);
   const [connected, setConnected] = useState(false);
-  const [gameId, setGameId] = useState<string>(null!);
-  const [playerList, setPlayerList] = useState<Player[]>(null!);
+  const [gameId, setGameId] = useState<string>('');
+  const [playerList, setPlayerList] = useState<Player[]>([]);
   const [question, setQuestion] = useState<Question>(null!);
   const connection = useRef<WebSocket>(null!);
   // might need to change the routes for joining game
@@ -36,16 +38,16 @@ export default function Home() {
     ws.onmessage = (evt) => {
       const message = JSON.parse(evt.data);
       switch (message.action) {
-        case "gamecreated":
+        case GAME_CREATED:
           setGameId(message.gameId)
           break;
-        case "playerlist":
+        case PLAYER_LIST:
           setPlayerList(message.players.splice(0));
           break;
-        case "question":
+        case QUESTION:
           setQuestion(message.question);
           break;
-        case "gameover":
+        case GAMEOVER:
           setCurrentStep(STEP_GAMEOVER);
           break;
         default:
