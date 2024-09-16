@@ -1,9 +1,7 @@
 "use client"
-import React, { useState, useEffect, useRef, useLayoutEffect} from 'react';
+import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { Question } from './_lib/Question';
-import { Player } from './_lib/Player';
 import { TriviaStep } from './_lib/TriviaStep';
 import { GetStarted } from './GetStarted';
 import { JoinGame } from './JoinGame';
@@ -11,63 +9,27 @@ import { Waiting } from './Waiting';
 import { GameOver } from './GameOver';
 import { Players } from './Players';
 import { Questions } from './Questions';
+import { useGameController } from './_lib/useGameController';
 
 const {STEP_GETSTARTED, STEP_JOINGAME, STEP_WAITING, STEP_GAMEOVER, STEP_QUESTIONS} =  TriviaStep;
 
 export default function Home() {
-  const [currentStep, setCurrentStep] = useState(STEP_GETSTARTED);
-  const [connected, setConnected] = useState(false);
-  const [gameId, setGameId] = useState<string>(null!);
-  const [playerList, setPlayerList] = useState<Player[]>(null!);
-  const [question, setQuestion] = useState<Question>(null!);
-  const connection = useRef<WebSocket>(null!);
-  // might need to change the routes for joining game
-  useLayoutEffect(() => {
-    if (document.location.hash.startsWith('#newgame') ) {
-      setCurrentStep(STEP_JOINGAME);
-      setGameId(document.location.hash.replace('#newgame/', ''));
-    }
-  }, [])
-  useEffect(() => {
-    const ws = new WebSocket(process.env.WEBSOCKET_ENDPOINT ?? '');
-    ws.onopen = () => {
-      setConnected(true);
-    }
-    ws.onmessage = (evt) => {
-      const message = JSON.parse(evt.data);
-      switch (message.action) {
-        case "gamecreated":
-          setGameId(message.gameId)
-          break;
-        case "playerlist":
-          setPlayerList(message.players.splice(0));
-          break;
-        case "question":
-          setQuestion(message.question);
-          break;
-        case "gameover":
-          setCurrentStep(STEP_GAMEOVER);
-          break;
-        default:
-          break;
-      }
-    }
-    connection.current = ws;
-    return ws.close;
-  }, [])
+
+  const {send, setCurrentStep, gameId, currentStep, connected, playerList, question} = useGameController()
+
   const newGame = () => {
     const message = JSON.stringify({ "action": "newgame" });
-    connection.current.send(message);
+    send(message);
     setCurrentStep(STEP_WAITING);
   }
   const joinGame = () => {
     const message = JSON.stringify({ "action": "joingame", "gameid": gameId });
-    connection.current.send(message);
+    send(message);
     setCurrentStep(STEP_QUESTIONS);
   }
   const startGame = () => {
     const message = JSON.stringify({ "action": "startgame", "gameid": gameId });
-    connection.current.send(message);
+    send(message);
     setCurrentStep(STEP_QUESTIONS);
   }
   const answer = (questionId: string, answer: string) => {
@@ -77,7 +39,7 @@ export default function Home() {
       "questionid": questionId,
       "answer": answer
     })
-    connection.current.send(message);
+    send(message);
   }
   return (
     <Container className="p-3">

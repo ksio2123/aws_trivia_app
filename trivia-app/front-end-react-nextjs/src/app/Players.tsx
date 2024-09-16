@@ -6,25 +6,23 @@ export function Players({playerList}: {playerList: Player[]}) {
     <Card>
       <Card.Body>
         <Card.Title>Players</Card.Title>
-
         <ListGroup>
-        {playerList && playerList.filter((player)=>player.currentPlayer).map((player) => {
-            return (<ListGroup.Item key={player.connectionId} variant="primary" className="d-flex justify-content-between align-items-center">
-              <span style={{color:player.playerName}}>&#11044; <span className="small" style={{color:"Black"}}>{player.playerName}</span></span>
+        {playerList.length === 0 && <div>no players</div>}
+        {playerList.length > 0 && playerList.map((player) => {
+          return (
+            <ListGroup.Item
+              key={player.connectionId}
+              {...(player.currentPlayer ? {variant: 'primary'} : {})}
+              className="d-flex justify-content-between align-items-center"
+            >
+              <span style={{color:player.playerName}}>&#11044;
+                <span className="small" style={{color:"Black"}}>{player.playerName}</span>
+              </span>
               <Badge pill>{player.score}</Badge>
-            </ListGroup.Item>)
+            </ListGroup.Item>
+          )
          })}
          </ListGroup>
-         <p></p>
-         <ListGroup>
-        {playerList ? playerList.filter((player)=>!player.currentPlayer).map((player) => {
-            return (<ListGroup.Item key={player.connectionId} className="d-flex justify-content-between align-items-center">
-              <span style={{color:player.playerName}}>&#11044; <span className="small" style={{color:"Black"}}>{player.playerName}</span></span>
-              <Badge pill >{player.score}</Badge>
-            </ListGroup.Item>)
-         }) : <div>no players</div>}
-
-        </ListGroup>
       </Card.Body>
     </Card>
   );

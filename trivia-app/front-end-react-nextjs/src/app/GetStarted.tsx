@@ -13,4 +13,3 @@ export function GetStarted({ onNewGame }: { onNewGame: () => void }) {
         </Card.Body>
       </Card>);
 }
-  
